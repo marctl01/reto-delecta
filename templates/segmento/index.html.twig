@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Segmento index{% endblock %}
+
+{% block body %}
+    <h1>Segmento index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Size</th>
+                <th>Uidentifier</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for segmento in segmentos %}
+            <tr>
+                <td>{{ segmento.id }}</td>
+                <td>{{ segmento.name }}</td>
+                <td>{{ segmento.size }}</td>
+                <td>{{ segmento.uidentifier }}</td>
+                <td>
+                    <a href="{{ path('app_segmento_show', {'id': segmento.id}) }}">show</a>
+                    <a href="{{ path('app_segmento_edit', {'id': segmento.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_segmento_new') }}">Create new</a>
+{% endblock %}

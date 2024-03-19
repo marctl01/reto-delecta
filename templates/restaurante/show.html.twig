@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restaurante{% endblock %}
+
+{% block body %}
+    <h1>Restaurante</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ restaurante.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ restaurante.name }}</td>
+            </tr>
+            <tr>
+                <th>Street_address</th>
+                <td>{{ restaurante.streetAddress }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ restaurante.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ restaurante.longitude }}</td>
+            </tr>
+            <tr>
+                <th>City_name</th>
+                <td>{{ restaurante.cityName }}</td>
+            </tr>
+            <tr>
+                <th>Popularity_rate</th>
+                <td>{{ restaurante.popularityRate }}</td>
+            </tr>
+            <tr>
+                <th>Satisfaction_rate</th>
+                <td>{{ restaurante.satisfactionRate }}</td>
+            </tr>
+            <tr>
+                <th>Last_avg_price</th>
+                <td>{{ restaurante.lastAvgPrice }}</td>
+            </tr>
+            <tr>
+                <th>Total_reviews</th>
+                <td>{{ restaurante.totalReviews }}</td>
+            </tr>
+            <tr>
+                <th>Uidentifier</th>
+                <td>{{ restaurante.uidentifier }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_restaurante_index') }}">back to list</a>
+
+    <a href="{{ path('app_restaurante_edit', {'id': restaurante.id}) }}">edit</a>
+
+    {{ include('restaurante/_delete_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Restaurante index{% endblock %}
+
+{% block body %}
+    <h1>Restaurante index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Street_address</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>City_name</th>
+                <th>Popularity_rate</th>
+                <th>Satisfaction_rate</th>
+                <th>Last_avg_price</th>
+                <th>Total_reviews</th>
+                <th>Uidentifier</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for restaurante in restaurantes %}
+            <tr>
+                <td>{{ restaurante.id }}</td>
+                <td>{{ restaurante.name }}</td>
+                <td>{{ restaurante.streetAddress }}</td>
+                <td>{{ restaurante.latitude }}</td>
+                <td>{{ restaurante.longitude }}</td>
+                <td>{{ restaurante.cityName }}</td>
+                <td>{{ restaurante.popularityRate }}</td>
+                <td>{{ restaurante.satisfactionRate }}</td>
+                <td>{{ restaurante.lastAvgPrice }}</td>
+                <td>{{ restaurante.totalReviews }}</td>
+                <td>{{ restaurante.uidentifier }}</td>
+                <td>
+                    <a href="{{ path('app_restaurante_show', {'id': restaurante.id}) }}">show</a>
+                    <a href="{{ path('app_restaurante_edit', {'id': restaurante.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="12">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_restaurante_new') }}">Create new</a>
+{% endblock %}

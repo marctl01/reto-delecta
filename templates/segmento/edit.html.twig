@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Segmento{% endblock %}
+
+{% block body %}
+    <h1>Edit Segmento</h1>
+
+    {{ include('segmento/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_segmento_index') }}">back to list</a>
+
+    {{ include('segmento/_delete_form.html.twig') }}
+{% endblock %}

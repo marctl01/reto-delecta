@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Importar JSON{% endblock %}
+
+{% block body %}
+    <h1>Importar JSON</h1>
+
+    <form method="post" action="{{ path('import_data') }}" enctype="multipart/form-data">
+        <div>
+            <label for="jsonFile">Seleccionar archivo JSON:</label>
+            <input type="file" id="jsonFile" name="jsonFile" accept=".json">
+        </div>
+        <button type="submit">Importar</button>
+    </form>
+{% endblock %}

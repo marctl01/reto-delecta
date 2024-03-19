@@ -26,7 +26,6 @@ APP_SECRET=4f276a1ea9d45da066bfbfe51107c089
 # DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db"
 # DATABASE_URL="mysql://app:!ChangeMe!@127.0.0.1:3306/app?serverVersion=8&charset=utf8mb4"
 # DATABASE_URL="postgresql://app:!ChangeMe!@127.0.0.1:5432/app?serverVersion=15&charset=utf8"
-DATABASE_URL=mysql://root@127.0.0.1:3306/retodelecta
 ###< doctrine/doctrine-bundle ###
 
 ###> symfony/messenger ###

@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Segmento{% endblock %}
+
+{% block body %}
+    <h1>Create new Segmento</h1>
+
+    {{ include('segmento/_form.html.twig') }}
+
+    <a href="{{ path('app_segmento_index') }}">back to list</a>
+{% endblock %}
