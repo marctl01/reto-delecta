@@ -21,6 +21,14 @@ class SegmentoRepository extends ServiceEntityRepository
         parent::__construct($registry, Segmento::class);
     }
 
+    public function deletea(Segmento $segmento): void
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($segmento);
+        $entityManager->flush();
+    }
+}
+
     //    /**
     //     * @return Segmento[] Returns an array of Segmento objects
     //     */
@@ -45,4 +53,4 @@ class SegmentoRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-}
+

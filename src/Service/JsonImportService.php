@@ -1,8 +1,6 @@
 <?php
-
 namespace App\Service;
 
-use App\Entity\Segmento;
 use App\Entity\Restaurante;
 use App\Repository\SegmentoRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -24,37 +22,57 @@ class JsonImportService
     }
 
     public function importDataFromJson($jsonData)
-    {
-        // Decodificar el JSON
-        $data = json_decode($jsonData, true);
+{
+    // Decodificar el JSON
+    $data = json_decode($jsonData, true);
     
-        // Iterar sobre cada objeto en el JSON
-        foreach ($data as $segmentoData) {
-            // Crear una instancia de Segmento utilizando el SegmentoFactory
-            $segmentoFactory = new SegmentoFactory($this->validator);
-            $segmento = $segmentoFactory->createSegmento($segmentoData);
-    
-            // Iterar sobre los restaurantes de este segmento
-            foreach ($segmentoData['restaruants'] as $restauranteData) {
-                // Crear una instancia de Restaurante utilizando el RestauranteFactory
-                $restauranteFactory = new RestauranteFactory($this->validator);
-                $restaurante = $restauranteFactory->createRestaurante($restauranteData);
-    
-                // Establecer la relación entre Restaurante y Segmento
-                $restaurante->addSegmento($segmento);
-                $segmento->addRestaurante($restaurante);
-    
-                // Persistir el restaurante si es necesario
-                $this->entityManager->persist($restaurante);
-            }
-    
-            // Persistir el segmento
-            $this->entityManager->persist($segmento);
-        }
-    
-        // Flush para persistir los cambios en la base de datos
-        $this->entityManager->flush();
+    // Array para almacenar restaurantes procesados
+    $processedRestaurantes = [];
 
+    // Iterar sobre cada objeto en el JSON
+    foreach ($data as $segmentoData) {
+        // Verificar si el segmento ya existe en la base de datos
+        $existingSegmento = $this->segmentoRepository->findOneBy(['uidentifier' => $segmentoData['uidentifier']]);
         
+        // Si el segmento no existe, crear uno nuevo
+        if (!$existingSegmento) {
+            $segmentoFactory = new SegmentoFactory($this->validator);
+            $existingSegmento = $segmentoFactory->createSegmento($segmentoData);
+        }
+        
+        // Iterar sobre los restaurantes de este segmento
+        foreach ($segmentoData['restaurants'] as $restauranteData) {
+            // Verificar si el restaurante ya ha sido procesado
+            if (!isset($processedRestaurantes[$restauranteData['uidentifier']])) {
+                // Verificar si el restaurante ya existe en la base de datos
+                $existingRestaurante = $this->entityManager->getRepository(Restaurante::class)
+                    ->findOneBy(['uidentifier' => $restauranteData['uidentifier']]);
+                
+                // Si el restaurante no existe, crear uno nuevo
+                if (!$existingRestaurante) {
+                    $restauranteFactory = new RestauranteFactory($this->validator);
+                    $existingRestaurante = $restauranteFactory->createRestaurante($restauranteData);
+                }
+                
+                // Marcar el restaurante como procesado
+                $processedRestaurantes[$restauranteData['uidentifier']] = true;
+
+                // Verificar si el restaurante ya está asociado al segmento
+                if (!$existingSegmento->getRestaurantes()->contains($existingRestaurante)) {
+                    $existingRestaurante->addSegmento($existingSegmento);
+                    $existingSegmento->addRestaurante($existingRestaurante);
+                }
+            }
+        }
+        
+        // Guardar el segmento
+        $this->entityManager->persist($existingSegmento);
     }
+    
+    // Flush para guardar los cambios en la base de datos
+    $this->entityManager->flush();
+}
+
+    
+    
 }

@@ -12,6 +12,9 @@
                 <th>Name</th>
                 <th>Size</th>
                 <th>Uidentifier</th>
+                <th>PopularidadMedia</th>
+                <th>SatisfaccionMedia</th>
+                <th>Avg_price</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +25,9 @@
                 <td>{{ segmento.name }}</td>
                 <td>{{ segmento.size }}</td>
                 <td>{{ segmento.uidentifier }}</td>
+                <td>{{ segmento.popularidadMedia }}</td>
+                <td>{{ segmento.satisfaccionMedia }}</td>
+                <td>{{ segmento.avgPrice }}</td>
                 <td>
                     <a href="{{ path('app_segmento_show', {'id': segmento.id}) }}">show</a>
                     <a href="{{ path('app_segmento_edit', {'id': segmento.id}) }}">edit</a>
@@ -29,7 +35,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="5">no records found</td>
+                <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

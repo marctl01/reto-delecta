@@ -7,7 +7,14 @@
 
     {{ include('segmento/_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('app_segmento_index') }}">back to list</a>
+    <a href="{{ path('app_segmento_index') }}">Back to list</a>
 
     {{ include('segmento/_delete_form.html.twig') }}
+
+    <h2>Recalculate Metrics</h2>
+
+    <a href="{{ path('recalcular_popularidad', {'id': segmento.id}) }}">Recalcular Popularidad</a>
+    <a href="{{ path('recalcular_satisfaccion', {'id': segmento.id}) }}">Recalcular Satisfaccion</a>
+    <a href="{{ path('recalcular_precio', {'id': segmento.id}) }}">Recalcular Precio</a>
+
 {% endblock %}

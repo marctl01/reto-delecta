@@ -2,9 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Restaurante;
 use App\Entity\Segmento;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -17,7 +15,9 @@ class SegmentoType extends AbstractType
             ->add('name')
             ->add('size')
             ->add('uidentifier')
-
+            ->add('popularidadMedia')
+            ->add('satisfaccionMedia')
+            ->add('avg_price')
         ;
     }
 

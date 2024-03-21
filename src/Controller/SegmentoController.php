@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Segmento;
 use App\Form\SegmentoType;
 use App\Repository\SegmentoRepository;
+use App\Service\MetricsCalculatorService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -78,4 +79,79 @@ class SegmentoController extends AbstractController
 
         return $this->redirectToRoute('app_segmento_index', [], Response::HTTP_SEE_OTHER);
     }
+    
+    #[Route('/recalcular-popularidad/{id}', name: 'recalcular_popularidad', methods: ['GET', 'POST'])]
+    public function recalcularPopularidad(int $id, MetricsCalculatorService $metricsCalculatorService, EntityManagerInterface $entityManager): Response
+    {
+        $segmento = $entityManager->getRepository(Segmento::class)->find($id);
+        
+        if (!$segmento) {
+            throw $this->createNotFoundException('El segmento no existe');
+        }
+    
+        $popularityMedia = $metricsCalculatorService->calcularPopularidadMedia($segmento);
+        $segmento->setPopularidadMedia($popularityMedia);
+    
+        $entityManager->persist($segmento);
+        $entityManager->flush();
+    
+        // Renderizar la plantilla de edición nuevamente con el segmento actualizado y el formulario
+        $form = $this->createForm(SegmentoType::class, $segmento);
+    
+        return $this->render('segmento/edit.html.twig', [
+            'segmento' => $segmento,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Route('/recalcular-satisfaccion/{id}', name: 'recalcular_satisfaccion', methods: ['GET', 'POST'])]
+public function recalcularSatisfaccion(int $id, MetricsCalculatorService $metricsCalculatorService, EntityManagerInterface $entityManager): Response
+{
+    $segmento = $entityManager->getRepository(Segmento::class)->find($id);
+    
+    if (!$segmento) {
+        throw $this->createNotFoundException('El segmento no existe');
+    }
+
+    $satisfaccionMedia = $metricsCalculatorService->calcularSatisfaccionMedia($segmento);
+    $segmento->setSatisfaccionMedia($satisfaccionMedia);
+
+    $entityManager->persist($segmento);
+    $entityManager->flush();
+
+
+
+    // Renderizar la plantilla de edición nuevamente con el segmento actualizado y el formulario
+    $form = $this->createForm(SegmentoType::class, $segmento);
+
+    return $this->render('segmento/edit.html.twig', [
+        'segmento' => $segmento,
+        'form' => $form->createView(),
+    ]);
+}
+
+#[Route('/recalcular-precio/{id}', name: 'recalcular_precio', methods: ['GET', 'POST'])]
+public function recalcularPrecio(int $id, MetricsCalculatorService $metricsCalculatorService, EntityManagerInterface $entityManager): Response
+{
+    $segmento = $entityManager->getRepository(Segmento::class)->find($id);
+    
+    if (!$segmento) {
+        throw $this->createNotFoundException('El segmento no existe');
+    }
+
+    $precioMedio = $metricsCalculatorService->calcularPrecioMedio($segmento);
+    $segmento->setAvgPrice($precioMedio);
+
+    $entityManager->persist($segmento);
+    $entityManager->flush();
+
+
+    // Renderizar la plantilla de edición nuevamente con el segmento actualizado y el formulario
+    $form = $this->createForm(SegmentoType::class, $segmento);
+
+    return $this->render('segmento/edit.html.twig', [
+        'segmento' => $segmento,
+        'form' => $form->createView(),
+    ]);
+}
 }

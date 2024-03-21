@@ -3,13 +3,64 @@
 {% block title %}Importar JSON{% endblock %}
 
 {% block body %}
-    <h1>Importar JSON</h1>
 
-    <form method="post" action="{{ path('import_data') }}" enctype="multipart/form-data">
-        <div>
-            <label for="jsonFile">Seleccionar archivo JSON:</label>
-            <input type="file" id="jsonFile" name="jsonFile" accept=".json">
+<div class="container relative flex flex-col justify-between h-full max-w-6xl px-10 mx-auto xl:px-0 mt-5">
+    <div class="w-full">
+        <div class="flex flex-col w-full mb-10 sm:flex-row">
+            <div class="w-full mb-10 sm:mb-0 sm:w-1/2">
+                <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-indigo-500 rounded-lg"></span>
+                    <div class="relative h-full p-5 bg-white border-2 border-indigo-500 rounded-lg">
+                        <div class="flex items-center -mt-1">
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">DAPP Development</h3>
+                        </div>
+                        <p class="mt-3 mb-1 text-xs font-medium text-indigo-500 uppercase">------------</p>
+                        <p class="mb-2 text-gray-600">A decentralized application (dapp) is an application built on a
+                            decentralized network that combines a smart contract and a frontend user interface.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="w-full sm:w-1/2">
+                <div class="relative h-full ml-0 md:mr-10">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-purple-500 rounded-lg"></span>
+                    <div class="relative h-full p-5 bg-white border-2 border-purple-500 rounded-lg">
+                        <div class="flex items-center -mt-1">
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Web 3.0 Development</h3>
+                        </div>
+                        <p class="mt-3 mb-1 text-xs font-medium text-purple-500 uppercase">------------</p>
+                        <p class="mb-2 text-gray-600">Web 3.0 is the third generation of Internet services that will
+                            focus on understanding and analyzing data to provide a semantic web.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-        <button type="submit">Importar</button>
-    </form>
+        <div class="flex flex-col w-full mb-5 sm:flex-row">
+            <div class="w-full mb-10 sm:mb-0 sm:w-1/2">
+                <div class="relative h-full ml-0 mr-0 sm:mr-10">
+                    <span class="absolute top-0 left-0 w-full h-full mt-1 ml-1 bg-blue-400 rounded-lg"></span>
+                    <div class="relative h-full p-5 bg-white border-2 border-blue-400 rounded-lg">
+                        <div class="flex items-center -mt-1">
+                            <h3 class="my-2 ml-3 text-lg font-bold text-gray-800">Importar Json</h3>
+                        </div>
+                        <p class="mt-3 mb-1 text-xs font-medium text-blue-400 uppercase">------------</p>
+                        <p class="mb-2 text-gray-600">Selecciona el Json para poblar la BBDD.</p>
+                        <form method="post" action="{{ path('import_data') }}" enctype="multipart/form-data">
+                            <div class="max-w-sm">
+                                <div class="relative z-0 mt-0.5 flex w-full -space-x-px">
+                                    <input type="file" id="jsonFile" name="jsonFile" accept=".json" required class="border border-gray-200">
+                                    <button type="submit" class="inline-flex w-auto cursor-pointer select-none appearance-none items-center justify-center space-x-1 rounded-r border border-gray-200 bg-white px-3 py-2 text-sm font-medium text-gray-800 transition hover:border-gray-300 hover:bg-gray-100 focus:z-10 focus:border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+</div>
+
 {% endblock %}
