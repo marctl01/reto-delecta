@@ -21,6 +21,14 @@ class RestauranteRepository extends ServiceEntityRepository
         parent::__construct($registry, Restaurante::class);
     }
 
+    public function paginationQuery()
+    {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.id', 'ASC')
+            ->getQuery()
+        ;
+    }
+
     //    /**
     //     * @return Restaurante[] Returns an array of Restaurante objects
     //     */

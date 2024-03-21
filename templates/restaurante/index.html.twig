@@ -3,51 +3,59 @@
 {% block title %}Restaurante index{% endblock %}
 
 {% block body %}
-    <h1>Restaurante index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Street_address</th>
-                <th>Latitude</th>
-                <th>Longitude</th>
-                <th>City_name</th>
-                <th>Popularity_rate</th>
-                <th>Satisfaction_rate</th>
-                <th>Last_avg_price</th>
-                <th>Total_reviews</th>
-                <th>Uidentifier</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for restaurante in restaurantes %}
-            <tr>
-                <td>{{ restaurante.id }}</td>
-                <td>{{ restaurante.name }}</td>
-                <td>{{ restaurante.streetAddress }}</td>
-                <td>{{ restaurante.latitude }}</td>
-                <td>{{ restaurante.longitude }}</td>
-                <td>{{ restaurante.cityName }}</td>
-                <td>{{ restaurante.popularityRate }}</td>
-                <td>{{ restaurante.satisfactionRate }}</td>
-                <td>{{ restaurante.lastAvgPrice }}</td>
-                <td>{{ restaurante.totalReviews }}</td>
-                <td>{{ restaurante.uidentifier }}</td>
-                <td>
-                    <a href="{{ path('app_restaurante_show', {'id': restaurante.id}) }}">show</a>
-                    <a href="{{ path('app_restaurante_edit', {'id': restaurante.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="12">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_restaurante_new') }}">Create new</a>
+
+
+    <div class="container px-4 sm:px-6 lg:px-8 py-8">
+        <h2 class="text-2xl font-bold mb-4">Restaurantes</h2>
+        <a href="{{ path('app_restaurante_new') }}">Create new</a>
+        <table id="example" class="table-auto w-full">
+            <thead>
+                <tr>
+                    <th class="px-4 py-2" >Id</th>
+                    <th class="px-4 py-2" >Name</th>
+                    <th class="px-4 py-2" >Street_address</th>
+                    <th class="px-4 py-2" >Latitude</th>
+                    <th class="px-4 py-2" >Longitude</th>
+                    <th class="px-4 py-2" >City_name</th>
+                    <th class="px-4 py-2" >Popularity_rate</th>
+                    <th class="px-4 py-2" >Satisfaction_rate</th>
+                    <th class="px-4 py-2" >Last_avg_price</th>
+                    <th class="px-4 py-2" >Total_reviews</th>
+                    <th class="px-4 py-2" >Uidentifier</th>
+                    <th class="px-4 py-2" >actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for restaurante in pagination %}
+                <tr>
+                    <td class="border px-4 py-2">{{ restaurante.id }}</td>
+                    <td class="border px-4 py-2">{{ restaurante.name }}</td>
+                    <td class="border px-4 py-2">{{ restaurante.streetAddress }}</td>
+                    <td class="border px-4 py-2">{{ restaurante.latitude }}</td>
+                    <td class="border px-4 py-2">{{ restaurante.longitude }}</td>
+                    <td class="border px-4 py-2">{{ restaurante.cityName }}</td>
+                    <td class="border px-4 py-2">{{ restaurante.popularityRate }}</td>
+                    <td class="border px-4 py-2">{{ restaurante.satisfactionRate }}</td>
+                    <td class="border px-4 py-2">{{ restaurante.lastAvgPrice }}</td>
+                    <td class="border px-4 py-2">{{ restaurante.totalReviews }}</td>
+                    <td class="border px-4 py-2">{{ restaurante.uidentifier }}</td>
+                    <td class="border px-4 py-2">
+                        <a href="{{ path('app_restaurante_show', {'id': restaurante.id}) }}">show</a>
+                        <a href="{{ path('app_restaurante_edit', {'id': restaurante.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="12">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        {{ knp_pagination_render(pagination)}}
+    <div>
+
+    
 {% endblock %}

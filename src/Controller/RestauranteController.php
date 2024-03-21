@@ -6,6 +6,7 @@ use App\Entity\Restaurante;
 use App\Form\RestauranteType;
 use App\Repository\RestauranteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,10 +16,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class RestauranteController extends AbstractController
 {
     #[Route('/', name: 'app_restaurante_index', methods: ['GET'])]
-    public function index(RestauranteRepository $restauranteRepository): Response
+    public function index(RestauranteRepository $restauranteRepository, Request $request, PaginatorInterface $paginatorInterface): Response
     {
+        $pagination = $paginatorInterface->paginate(
+            $restauranteRepository->paginationQuery(),
+            $request->query->get('page', 1),
+            
+        );
         return $this->render('restaurante/index.html.twig', [
-            'restaurantes' => $restauranteRepository->findAll(),
+            'pagination' => $pagination
         ]);
     }
 

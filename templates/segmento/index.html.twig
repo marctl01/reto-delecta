@@ -5,21 +5,33 @@
 {% block body %}
     <h1>Segmento index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Size</th>
-                <th>Uidentifier</th>
-                <th>PopularidadMedia</th>
-                <th>SatisfaccionMedia</th>
-                <th>Avg_price</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for segmento in segmentos %}
+    <!--Container-->
+	<div class="container w-full md:w-4/5 xl:w-3/5  mx-auto px-2">
+
+		<!--Title-->
+		<h1 class="flex items-center font-sans font-bold break-normal text-indigo-500 px-2 py-8 text-xl md:text-2xl">
+			Responsive <a class="underline mx-2" href="https://datatables.net/">DataTables.net</a> Table
+		</h1>
+
+
+		<!--Card-->
+		<div id='recipients' class="p-8 mt-6 lg:mt-0 rounded shadow bg-white">
+
+
+			<table id="example" class="stripe hover" style="width:100%; padding-top: 1em;  padding-bottom: 1em;">
+				<thead>
+					<tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Size</th>
+                            <th>Uidentifier</th>
+                            <th>PopularidadMedia</th>
+                            <th>SatisfaccionMedia</th>
+                            <th>Avg_price</th>
+                            <th>actions</th>
+					</tr>
+				</thead>
+				        {% for segmento in pagination %}
             <tr>
                 <td>{{ segmento.id }}</td>
                 <td>{{ segmento.name }}</td>
@@ -38,8 +50,19 @@
                 <td colspan="8">no records found</td>
             </tr>
         {% endfor %}
-        </tbody>
-    </table>
+
+			</table>
+
+
+		</div>
+		<!--/Card-->
+        {{ knp_pagination_render(pagination)}}
+
+
+	</div>
+	<!--/container-->
+
+    
 
     <a href="{{ path('app_segmento_new') }}">Create new</a>
 {% endblock %}

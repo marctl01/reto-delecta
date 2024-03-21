@@ -7,6 +7,7 @@ use App\Form\SegmentoType;
 use App\Repository\SegmentoRepository;
 use App\Service\MetricsCalculatorService;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,10 +17,17 @@ use Symfony\Component\Routing\Annotation\Route;
 class SegmentoController extends AbstractController
 {
     #[Route('/', name: 'app_segmento_index', methods: ['GET'])]
-    public function index(SegmentoRepository $segmentoRepository): Response
+    public function index(SegmentoRepository $segmentoRepository, Request $request, PaginatorInterface $paginatorInterface): Response
     {
+        $segmentos = $segmentoRepository->findAll();
+
+        $pagination = $paginatorInterface->paginate(
+            $segmentoRepository->paginationQuery(),
+            $request->query->get('page', 1),
+            
+        );
         return $this->render('segmento/index.html.twig', [
-            'segmentos' => $segmentoRepository->findAll(),
+            'pagination' => $pagination
         ]);
     }
 

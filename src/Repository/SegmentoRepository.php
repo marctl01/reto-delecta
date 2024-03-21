@@ -21,28 +21,14 @@ class SegmentoRepository extends ServiceEntityRepository
         parent::__construct($registry, Segmento::class);
     }
 
-    public function deletea(Segmento $segmento): void
-    {
-        $entityManager = $this->getEntityManager();
-        $entityManager->remove($segmento);
-        $entityManager->flush();
-    }
-}
 
-    //    /**
-    //     * @return Segmento[] Returns an array of Segmento objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('s')
-    //            ->andWhere('s.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('s.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function paginationQuery()
+    {
+        return $this->createQueryBuilder('s')
+            ->orderBy('s.id', 'ASC')
+            ->getQuery()
+        ;
+    }
 
     //    public function findOneBySomeField($value): ?Segmento
     //    {
@@ -54,3 +40,4 @@ class SegmentoRepository extends ServiceEntityRepository
     //        ;
     //    }
 
+}
