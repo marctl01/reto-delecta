@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+  
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+text-decoration: none;
+}
+.current{
+    color: white;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: blue;
+}
+
+
+.pagination a.active {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+.pagination a:hover:not(.active) {background-color: #ddd;}

@@ -5,57 +5,72 @@
 {% block body %}
 
 
-
-
-    <div class="container px-4 sm:px-6 lg:px-8 py-8">
-        <h2 class="text-2xl font-bold mb-4">Restaurantes</h2>
-        <a href="{{ path('app_restaurante_new') }}">Create new</a>
-        <table id="example" class="table-auto w-full">
+<div class="w-full px-4 py-4 overflow-x-auto">
+    <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
+        <table class="min-w-full leading-normal">
             <thead>
                 <tr>
-                    <th class="px-4 py-2" >Id</th>
-                    <th class="px-4 py-2" >Name</th>
-                    <th class="px-4 py-2" >Street_address</th>
-                    <th class="px-4 py-2" >Latitude</th>
-                    <th class="px-4 py-2" >Longitude</th>
-                    <th class="px-4 py-2" >City_name</th>
-                    <th class="px-4 py-2" >Popularity_rate</th>
-                    <th class="px-4 py-2" >Satisfaction_rate</th>
-                    <th class="px-4 py-2" >Last_avg_price</th>
-                    <th class="px-4 py-2" >Total_reviews</th>
-                    <th class="px-4 py-2" >Uidentifier</th>
-                    <th class="px-4 py-2" >actions</th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                        Name
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                        Dirección
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                        Ciudad
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                        Popularidad
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                        Precio Medio
+                    </th>
+                    <th class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider text-center">
+                        Acciones
+                    </th>
                 </tr>
             </thead>
             <tbody>
             {% for restaurante in pagination %}
+
                 <tr>
-                    <td class="border px-4 py-2">{{ restaurante.id }}</td>
-                    <td class="border px-4 py-2">{{ restaurante.name }}</td>
-                    <td class="border px-4 py-2">{{ restaurante.streetAddress }}</td>
-                    <td class="border px-4 py-2">{{ restaurante.latitude }}</td>
-                    <td class="border px-4 py-2">{{ restaurante.longitude }}</td>
-                    <td class="border px-4 py-2">{{ restaurante.cityName }}</td>
-                    <td class="border px-4 py-2">{{ restaurante.popularityRate }}</td>
-                    <td class="border px-4 py-2">{{ restaurante.satisfactionRate }}</td>
-                    <td class="border px-4 py-2">{{ restaurante.lastAvgPrice }}</td>
-                    <td class="border px-4 py-2">{{ restaurante.totalReviews }}</td>
-                    <td class="border px-4 py-2">{{ restaurante.uidentifier }}</td>
-                    <td class="border px-4 py-2">
-                        <a href="{{ path('app_restaurante_show', {'id': restaurante.id}) }}">show</a>
-                        <a href="{{ path('app_restaurante_edit', {'id': restaurante.id}) }}">edit</a>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap ">{{ restaurante.name }}</p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap text-center">{{ restaurante.streetAddress }}</p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap text-center">{{ restaurante.cityName }}</p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap text-center">{{ restaurante.popularityRate }}</p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <p class="text-gray-900 whitespace-no-wrap text-center">{{ restaurante.lastAvgPrice }}</p>
+                    </td>
+                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+                        <!-- Aquí colocarías tus botones de acciones, como editar, eliminar, etc. -->
                     </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="12">no records found</td>
+                    <td colspan="6">No se encontraron registros</td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+        <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+    </div>
+</div>
 
-        {{ knp_pagination_render(pagination)}}
-    <div>
+
+
+
+
+
 
     
 {% endblock %}
