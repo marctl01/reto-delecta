@@ -30,6 +30,23 @@ class SegmentoRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+     * Busca segmentos por el nombre.
+     *
+     * @param string|null $nombreSegmento
+     * @return Restaurante[]
+     */
+    public function findByNombreSegmento(?string $nombreSegmento): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.name LIKE :nombre')
+            ->setParameter('nombre', '%' . $nombreSegmento . '%')
+            ->orderBy('r.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    
+
     //    public function findOneBySomeField($value): ?Segmento
     //    {
     //        return $this->createQueryBuilder('s')

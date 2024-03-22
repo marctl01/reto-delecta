@@ -1,4 +1,28 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<form id="segmento_form" class="mt-6" method="post" action="/segmento/{{segmento.id ?? 'new'}}">
+    <div>
+        <label for="segmento_name" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Nombre</label>
+        <input id="segmento_name" type="text" name="segmento[name]" value="{{ segmento.name ?? '' }}" maxlength="255" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+    </div>
+    <div>
+        <label for="segmento_size" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Tamaño</label>
+        <input id="segmento_size" type="number" name="segmento[size]" value="{{ segmento.size ?? '' }}" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+    </div>
+    <div>
+        <label for="segmento_uidentifier" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Uidentifier</label>
+        <input id="segmento_uidentifier" type="text" name="segmento[uidentifier]" value="{{ segmento.uidentifier ?? '' }}" maxlength="255" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+    </div>
+    <div>
+        <label for="segmento_popularidadMedia" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Popularidad media</label>
+        <input id="segmento_popularidadMedia" type="text" name="segmento[popularidadMedia]" inputmode="decimal" value="{{ segmento.popularidadMedia ?? '' }}" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" />
+    </div>
+    <div>
+        <label for="segmento_satisfaccionMedia" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Satisfacción media</label>
+        <input id="segmento_satisfaccionMedia" type="text" name="segmento[satisfaccionMedia]" inputmode="decimal" value="{{ segmento.satisfaccionMedia ?? '' }}" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" />
+    </div>
+    <div>
+        <label for="segmento_avg_price" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Precio medio</label>
+        <input id="segmento_avg_price" type="text" name="segmento[avg_price]" inputmode="decimal" value="{{ segmento.avgprice ?? '' }}" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" />
+    </div>
+    <input type="hidden" id="segmento__token" name="segmento[_token]" value="{{ csrf_token('segmento') }}">
+    <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">Enviar</button>
+</form>

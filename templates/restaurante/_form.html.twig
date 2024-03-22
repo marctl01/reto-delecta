@@ -1,4 +1,64 @@
-{{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(form) }}
+<form id="restaurante" class="mt-6" method="post" action="/restaurante/{{restaurante.id ?? 'new'}}">
+    <div>
+        <label for="restaurante_uidentifier" class="block mt-2 text-xs font-bold text-gray-600 uppercase">uidentifier</label>
+        <input id="restaurante_uidentifier" type="text" name="restaurante[uidentifier]" value="{{ restaurente.uidentifier ?? '' }}" maxlength="255" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"  required/>
+    </div>
+    <div>
+        <label for="restaurante_name" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Nombre</label>
+        <input id="restaurante_name" type="text" name="restaurante[name]" value="{{ restaurente.name ?? '' }}" maxlength="255" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+    </div>
+    <div>
+        <label for="restaurante_street_address" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Dirección</label>
+        <input id="restaurante_street_address" type="text" name="restaurante[street_address]" value="{{ restaurante.streetaddress ?? '' }}" maxlength="255" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" />
+    </div>
+    <div>
+        <label for="restaurante_city_name" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Ciudad</label>
+        <input id="restaurante_city_name" type="text" name="restaurante[city_name]" value="{{ restaurante.cityname ?? '' }}" maxlength="255" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+    </div>
+    <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+        <label for="restaurante_latitude" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Latitud</label>
+        <input id="restaurante_latitude" type="text" name="restaurante[latitude]" inputmode="decimal" value="{{ restaurente.latitude ?? '' }}"  class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+        </span>
+        <span class="w-1/2">
+        <label for="restaurante_longitude" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Longitud</label>
+        <input id="restaurante_longitude" type="text" name="restaurante[longitude]" inputmode="decimal" value="{{ restaurente.longitude ?? '' }}"  class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+        </span>
+    </div>
+    <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+        <label for="restaurante_popularity_rate" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Popularidad</label>
+        <input id="restaurante_popularity_rate" type="text" name="restaurante[popularity_rate]" inputmode="decimal" value="{{ restaurente.popularityrate ?? '' }}"  class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+        </span>
+        <span class="w-1/2">
+        <label for="restaurante_satisfaction_rate" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Satisfaccion</label>
+        <input id="restaurante_satisfaction_rate" type="text" name="restaurante[satisfaction_rate]" inputmode="decimal" value="{{ restaurente.satisfactionrate ?? '' }}"  class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" />
+        </span>
+    </div>
+    <div class="flex justify-between gap-3">
+        <span class="w-1/2">
+        <label for="restaurante_last_avg_price" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Precio medio</label>
+        <input id="restaurante_last_avg_price" type="text" name="restaurante[last_avg_price]" inputmode="decimal" value="{{ restaurente.lastavgprice ?? '' }}"  class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+        </span>
+        <span class="w-1/2">
+        <label for="restaurante_total_reviews" class="block mt-2 text-xs font-bold text-gray-600 uppercase">Reviews totales</label>
+        <input id="restaurante_total_reviews" type="number" name="restaurante[total_reviews]" value="{{ restaurente.totalreviews ?? '' }}"  class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+        </span>
+    </div>
+
+    <div>
+        <label class="block mt-2 text-xs font-bold text-gray-600 uppercase">Segmentos</label>
+        <ul>
+            {% for segmento in restaurante.segmentos %}
+            <li for="restaurante_last_avg_price" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">{{ segmento.id }} - {{ segmento.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <input type="hidden" id="restaurante__token" name="restaurante[_token]" value="{{ csrf_token('restaurante') }}">
+    <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+        Enviar
+    </button>
+
+</form>
+

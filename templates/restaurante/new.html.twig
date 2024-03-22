@@ -3,9 +3,15 @@
 {% block title %}New Restaurante{% endblock %}
 
 {% block body %}
-    <h1>Create new Restaurante</h1>
 
-    {{ include('restaurante/_form.html.twig') }}
+    <div class="grid place-items-center p-5">
+        <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2  rounded-lg">
+            <div class="flex justify-between">
+                <h1 class="text-xl font-semibold uppercase"> Crear restaurante </h1>
+                <h1 class="text-xl font-semibold uppercase"><a href="{{ path('app_restaurante_index') }}">Volver</a></h1>
+            </div>
+            {{ include('restaurante/_form.html.twig') }}
 
-    <a href="{{ path('app_restaurante_index') }}">back to list</a>
+        </div>
+    </div>
 {% endblock %}

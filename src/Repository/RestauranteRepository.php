@@ -29,6 +29,22 @@ class RestauranteRepository extends ServiceEntityRepository
         ;
     }
 
+        /**
+     * Busca restaurantes por el nombre del restaurante.
+     *
+     * @param string|null $nombreRestaurante
+     * @return Restaurante[]
+     */
+    public function findByNombreRestaurante(?string $nombreRestaurante): array
+    {
+        return $this->createQueryBuilder('r')
+            ->andWhere('r.name LIKE :nombre')
+            ->setParameter('nombre', '%' . $nombreRestaurante . '%')
+            ->orderBy('r.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
     //    /**
     //     * @return Restaurante[] Returns an array of Restaurante objects
     //     */
